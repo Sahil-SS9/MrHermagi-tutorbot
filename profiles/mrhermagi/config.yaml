@@ -1,0 +1,259 @@
+model:
+  default: kimi-k2.6
+  provider: ollama-cloud
+  base_url: https://ollama.com/v1
+fallback_providers:
+- provider: ollama-cloud
+  model: kimi-k2.6
+  base_url: https://ollama.com/v1
+- provider: nous
+  model: qwen/qwen3.6-plus
+  base_url: https://inference-api.nousresearch.com/v1
+- provider: openrouter
+  model: nvidia/nemotron-3-super-120b-a12b
+  base_url: https://openrouter.ai/api/v1
+credential_pool_strategies: {}
+toolsets:
+- web
+- terminal
+- file
+- delegation
+- cronjob
+- browser
+- image_gen
+agent:
+  max_turns: 85
+  gateway_timeout: 1800
+  restart_drain_timeout: 60
+  api_max_retries: 3
+  service_tier: ''
+  tool_use_enforcement: auto
+  gateway_timeout_warning: 900
+  gateway_notify_interval: 180
+  gateway_auto_continue_freshness: 3600
+  image_input_mode: auto
+  disabled_toolsets: []
+  verbose: false
+  reasoning_effort: low
+terminal:
+  backend: local
+  modal_mode: auto
+  cwd: ~/.hermes/profiles/mrhermagi
+  timeout: 180
+  env_passthrough: []
+  shell_init_files: []
+  auto_source_bashrc: true
+  docker_image: nikolaik/python-nodejs:python3.11-nodejs20
+  docker_forward_env: []
+  docker_env: {}
+  singularity_image: docker://nikolaik/python-nodejs:python3.11-nodejs20
+  modal_image: nikolaik/python-nodejs:python3.11-nodejs20
+  daytona_image: nikolaik/python-nodejs:python3.11-nodejs20
+  vercel_runtime: node24
+  container_cpu: 1
+  container_memory: 5120
+  container_disk: 51200
+  container_persistent: true
+  docker_volumes: []
+  docker_mount_cwd_to_workspace: false
+  docker_run_as_host_user: false
+  persistent_shell: true
+  lifetime_seconds: 300
+browser:
+  inactivity_timeout: 120
+  command_timeout: 30
+  record_sessions: false
+  allow_private_urls: false
+  auto_local_for_private_urls: true
+  cdp_url: ''
+  dialog_policy: must_respond
+  dialog_timeout_s: 300
+  camofox:
+    managed_persistence: false
+checkpoints:
+  enabled: true
+  max_snapshots: 50
+  auto_prune: false
+  retention_days: 7
+  delete_orphans: true
+  min_interval_hours: 24
+file_read_max_chars: 100000
+tool_output:
+  max_bytes: 50000
+  max_lines: 2000
+  max_line_length: 2000
+tool_loop_guardrails:
+  warnings_enabled: true
+  hard_stop_enabled: false
+  warn_after:
+    exact_failure: 2
+    same_tool_failure: 3
+    idempotent_no_progress: 2
+  hard_stop_after:
+    exact_failure: 5
+    same_tool_failure: 8
+    idempotent_no_progress: 5
+compression:
+  enabled: true
+  threshold: 0.8
+  target_ratio: 0.2
+  protect_last_n: 20
+  hygiene_hard_message_limit: 400
+prompt_caching:
+  cache_ttl: 5m
+display:
+  compact: false
+  personality: minimal
+  resume_display: full
+  busy_input_mode: interrupt
+  tui_auto_resume_recent: false
+  bell_on_complete: false
+  show_reasoning: true
+  streaming: true
+  final_response_markdown: strip
+  inline_diffs: true
+  show_cost: false
+  skin: default
+  tui_status_indicator: kaomoji
+  user_message_preview:
+    first_lines: 2
+    last_lines: 2
+  interim_assistant_messages: true
+  tool_progress_command: false
+  tool_progress_overrides: {}
+  tool_preview_length: 0
+  ephemeral_system_ttl: 0
+  platforms: {}
+  runtime_footer:
+    enabled: false
+    fields:
+    - model
+    - context_pct
+    - cwd
+  tool_progress: all
+  background_process_notifications: all
+dashboard:
+  theme: default
+privacy:
+  redact_pii: false
+tts:
+  provider: edge
+  edge:
+    voice: en-GB-SoniaNeural
+  openai:
+    model: gpt-4o-mini-tts
+    voice: fable
+stt:
+  enabled: false
+timezone: Europe/London
+discord:
+  require_mention: true
+  free_response_channels: ''
+  allowed_channels: ''
+  auto_thread: true
+  reactions: true
+  channel_prompts: {}
+  server_actions: ''
+approvals:
+  mode: manual
+  timeout: 60
+  cron_mode: deny
+  mcp_reload_confirm: true
+context:
+  engine: compressor
+memory:
+  memory_enabled: true
+  user_profile_enabled: true
+  memory_char_limit: 2200
+  user_char_limit: 4000
+  nudge_interval: 10
+  flush_min_turns: 6
+delegation:
+  model: kimi-k2.6
+  provider: ollama-cloud
+  base_url: https://ollama.com/v1
+  api_key_file: ~/.hermes/.env
+  inherit_mcp_toolsets: false
+  max_iterations: 30
+  child_timeout_seconds: 600
+  reasoning_effort: ''
+  max_concurrent_children: 3
+  max_spawn_depth: 2
+  orchestrator_enabled: true
+  subagent_auto_approve: false
+skills:
+  external_dirs: []
+  template_vars: true
+  inline_shell: false
+  inline_shell_timeout: 10
+  guard_agent_created: false
+  creation_nudge_interval: 15
+  disabled: []
+always_skills:
+- arxiv
+- youtube-content
+- llm-wiki
+- huggingface-hub
+- hyperframes
+- cron-output-contract
+- blogwatcher
+- market-research
+- spotify
+- obsidian
+curator:
+  enabled: false
+kanban:
+  dispatch_in_gateway: false
+  dispatch_interval_seconds: 60
+code_execution:
+  mode: project
+  timeout: 300
+  max_tool_calls: 50
+logging:
+  level: INFO
+  max_size_mb: 5
+  backup_count: 3
+cron:
+  wrap_response: true
+  max_parallel_jobs: null
+hierarchical:
+  enabled: false
+model_catalog:
+  enabled: true
+  url: https://hermes-agent.nousresearch.com/docs/api/model-catalog.json
+  ttl_hours: 24
+  providers: {}
+network:
+  force_ipv4: false
+sessions:
+  auto_prune: false
+  retention_days: 90
+  vacuum_after_prune: true
+  min_interval_hours: 24
+updates:
+  pre_update_backup: true
+  backup_keep: 5
+_config_version: 29
+session_reset:
+  mode: both
+  idle_minutes: 1440
+  at_hour: 4
+streaming:
+  enabled: false
+plugins:
+  enabled: []
+  disabled: []
+platform_toolsets:
+  cli:
+  - web
+  - terminal
+  - file
+  - code_execution
+  - skills
+  - memory
+  - session_search
+  - clarify
+  - delegation
+  - cronjob
+  - messaging
+  - no_mcp

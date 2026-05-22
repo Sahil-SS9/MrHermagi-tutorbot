@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{LESSON_TITLE}}</title>
+<style>
+  :root { color-scheme: dark; --bg: #11100f; --card: #1c1a18; --card-alt: #2c2a28; --text: #f5f5f4; --muted: #a8a29e; --accent: #fbbf24; --border: #34302c; --code-bg: #262422; }
+  body { background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; line-height: 1.65; margin: 0; padding: 24px 16px; }
+  .wrap { max-width: 720px; margin: 0 auto; }
+  h1 { font-size: 1.6rem; border-bottom: 2px solid var(--accent); padding-bottom: 8px; }
+  h2 { font-size: 1.25rem; color: var(--accent); margin-top: 32px; }
+  p { margin: 12px 0; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 24px; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; margin: 18px 0; }
+  .card-alt { background: var(--card-alt); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; margin: 18px 0; }
+  .label { display: inline-block; background: var(--accent); color: #11100f; font-weight: 700; font-size: 0.75rem; padding: 3px 8px; border-radius: 6px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.04em; }
+  pre { background: var(--code-bg); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; overflow-x: auto; font-family: monospace; font-size: 0.85rem; line-height: 1.5; color: var(--muted); }
+  code { background: var(--code-bg); padding: 2px 6px; border-radius: 6px; }
+  ul, ol { margin: 10px 0; padding-left: 22px; }
+  li { margin: 8px 0; }
+  .qa { background: var(--card-alt); border-left: 4px solid var(--accent); padding: 12px 16px; margin: 12px 0; border-radius: 0 10px 10px 0; }
+  .qa i { display: block; font-style: italic; color: var(--muted); margin-bottom: 4px; }
+  table { width: 100%; border-collapse: collapse; margin: 14px 0; }
+  th, td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; }
+  th { background: var(--card-alt); color: var(--accent); }
+  tr:nth-child(even) { background: rgba(52, 48, 44, 0.35); }
+  .resources { list-style: none; padding-left: 0; }
+  .resources li { padding: 8px 0; border-bottom: 1px solid var(--border); }
+  .resources li:last-child { border-bottom: none; }
+</style>
+</head>
+<body><div class="wrap">
+
+<h1>📘 {{LESSON_TITLE}}</h1>
+<div class="meta">{{WEEK_LABEL}} · {{DATE}}</div>
+
+<div class="card">
+  <div class="label">Why This Matters</div>
+  <p>{{WHY_MATTERS}}</p>
+</div>
+
+<h2>🔌 The Core Idea</h2>
+<p>{{CORE_EXPLANATION}}</p>
+
+<h2>🔧 Analogies & Details</h2>
+<p>{{DETAIL_SECTION}}</p>
+
+<h2>💬 Q&A</h2>
+<div class="qa"><i>Q1:</i> {{Q1}}</div>
+<div class="qa"><i>Q2:</i> {{Q2}}</div>
+<div class="qa"><i>Q3:</i> {{Q3}}</div>
+
+<h2>🔗 Resources</h2>
+<ul class="resources">
+  <li><a href="{{RESOURCE_1_URL}}">{{RESOURCE_1_NAME}}</a> — {{RESOURCE_1_NOTE}}</li>
+  <li><a href="{{RESOURCE_2_URL}}">{{RESOURCE_2_NAME}}</a> — {{RESOURCE_2_NOTE}}</li>
+  <li><a href="{{RESOURCE_3_URL}}">{{RESOURCE_3_NAME}}</a> — {{RESOURCE_3_NOTE}}</li>
+</ul>
+
+<div class="meta" style="margin-top:36px;text-align:center;color:var(--muted);">Miyagi · {{WEEK_LABEL}} · {{DATE}}</div>
+
+</div></body>
+</html>

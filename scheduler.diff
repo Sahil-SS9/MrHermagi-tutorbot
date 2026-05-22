@@ -1,0 +1,42 @@
+diff --git a/cron/scheduler.py b/cron/scheduler.py
+index ec78e3ede..9a97d8a8d 100644
+--- a/cron/scheduler.py
++++ b/cron/scheduler.py
+@@ -710,17 +710,27 @@ def _deliver_result(job: dict, content: str, adapters=None, loop=None) -> Option
+                 text_to_send = cleaned_delivery_content.strip()
+                 adapter_ok = True
+                 combine_discord_attachment = False
+-                if platform_name.lower() == "discord" and text_to_send and len(media_files) == 1:
+-                    # Discord supports captions on file/image/video sends, but voice/audio
+-                    # delivery paths do not consistently carry captions. Keep text as a
+-                    # separate message for audio so the human-facing content is not lost.
++                if platform_name.lower() == "discord" and text_to_send and media_files:
++                    # Discord supports captions on file/image/video/document sends.
++                    # Find the first non-audio file to attach the text as caption.
++                    # Audio files are sent separately since they don't reliably carry captions.
+                     from gateway.platforms.base import should_send_media_as_audio
+-
+-                    media_path, is_voice = media_files[0]
+-                    media_ext = Path(media_path).suffix.lower()
+-                    combine_discord_attachment = not should_send_media_as_audio(
+-                        platform, media_ext, is_voice=is_voice
+-                    )
++                    first_non_audio_idx = None
++                    for idx, (m_path, m_voice) in enumerate(media_files):
++                        m_ext = Path(m_path).suffix.lower()
++                        if not should_send_media_as_audio(platform, m_ext, is_voice=m_voice):
++                            first_non_audio_idx = idx
++                            break
++
++                    if first_non_audio_idx is not None:
++                        # Move the non-audio file to index 0 so _send_media_via_adapter
++                        # attaches the text caption to the right file.
++                        if first_non_audio_idx > 0:
++                            media_files.insert(0, media_files.pop(first_non_audio_idx))
++                        combine_discord_attachment = True
++                    elif len(media_files) == 1:
++                        # Only audio: combine anyway (caption may not render but text is sent)
++                        combine_discord_attachment = True
+                 if text_to_send and not combine_discord_attachment:
+                     from agent.async_utils import safe_schedule_threadsafe
+                     future = safe_schedule_threadsafe(
