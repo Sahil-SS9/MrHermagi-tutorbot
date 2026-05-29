@@ -37,10 +37,24 @@ hermes cron create \
   --prompt "$(cat templates/cron-prompt.md)" \
   --name "MrHermagi Daily Lesson"
 
-# 6. Apply the scheduler patch (fixes HTML+audio in one message)
-patch ~/.hermes/hermes-agent/cron/scheduler.py < scheduler.diff
-# Restart gateway after applying
+# 6. Threaded delivery (HTML + audio as ONE comment inside the weekly thread)
+#    Recent Hermes builds deliver lesson files correctly into the week thread.
+#    If your build posts the text, HTML and audio as THREE separate posts (or
+#    spawns a new thread per attachment), see scheduler.diff for the fix and
+#    apply it to your Hermes checkout's cron/scheduler.py + Discord adapter,
+#    then restart the gateway. Path varies by install — find it with:
+#      python -c "import cron.scheduler as s; print(s.__file__)"
 ```
+
+> **Note on the delivery fix.** Older versions of this repo shipped a
+> `scheduler.diff` that only combined text with a single attachment. The real
+> cause of the "three separate posts" clutter is that the Discord file-send
+> path ignored the target `thread_id` and created a new forum thread per file.
+> The current fix is two-part: (1) the file-send methods honour `thread_id` so
+> attachments land in the existing weekly thread, and (2) the cron scheduler
+> attaches the lesson text as a caption on the HTML so it is one combined
+> message plus the audio follow-up. Audio always posts as a separate message
+> (Discord does not reliably caption audio).
 
 ## Structure
 
@@ -115,6 +129,17 @@ The `curriculum/ai-ml-learning.yaml` covers a complete 4-week AI/ML foundations 
 - Discord.py — Discord gateway integration
 - edge-tts — audio summary generation
 - No external API costs beyond your existing Hermes provider
+
+## Choosing a model
+
+The default works on a free/low-cost model so anyone can run it. Lesson quality
+is mostly bounded by the model: a small free model gives serviceable lessons, a
+larger model gives noticeably deeper, better-structured ones. Set the model on
+the cron job (or in the profile `config.yaml`). For teaching, a strong
+general/instruct model is a better fit than a coding-specialised one — for
+example a large general model such as `gpt-oss:120b` via an OpenAI-compatible
+provider produces markedly richer lessons than a 20-30B free model. Keep a
+smaller model as a fallback to stay resilient and cheap.
 
 ## License
 

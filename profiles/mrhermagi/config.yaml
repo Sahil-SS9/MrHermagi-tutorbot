@@ -153,6 +153,8 @@ discord:
   auto_thread: true
   reactions: true
   channel_prompts: {}
+  extra:
+    gateway_restart_notification: false
   server_actions: ''
 approvals:
   mode: manual
