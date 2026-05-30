@@ -23,10 +23,6 @@ Sahil is going THROUGH the learning process, not reviewing it. Accuracy alone is
 
 Do not teach from memory alone. Use your skills (arxiv, llm-wiki, blogwatcher, market-research, youtube-content) to ground the lesson in current, accurate sources. Pull at least one primary source (paper, model card, or authoritative doc) and one thing to try (playground, tokeniser, interactive demo). Cite them with real links.
 
-## RESEARCH FIRST (do this before writing)
-
-Do not teach from memory alone. Use your skills (arxiv, llm-wiki, blogwatcher, market-research, youtube-content) to ground the lesson in current, accurate sources. Pull at least one primary source (paper, model card, or authoritative doc) and one thing to try (playground, tokeniser, interactive demo). Cite them with real links.
-
 ## CURRICULUM
 
 Read the current curriculum from `~/.hermes/profiles/mrhermagi/curriculum.yaml`.
@@ -53,25 +49,21 @@ Example: `Week 1: Foundations - Tokenisation - Lesson 3 - Token-Maxxing & Tokeni
 
 ## DELIVERY FORMAT
 
-Each lesson is a single Discord reply message in the current week's thread.
+The Discord message is a SHORT, scannable summary — the full lesson lives in the HTML attachment. The summary is the single "Today's learnings" comment in the week thread, and the HTML + audio are attached to it. Keep the Discord message UNDER 1800 characters total (hard limit — Discord truncates/splits beyond ~2000). It must be a teaser + signpost to the HTML, NOT the whole lesson.
 
-Structure your delivery message as:
+Structure the Discord summary message as:
 
 1. **Title line** in proper format
-2. **Learning objective** (the "By the end you can ..." line)
-3. **Why this matters** — 1-2 sentences
-4. **Concept explainer** — the layered explanation with analogies and ASCII diagrams
-5. **Worked example** — grounded in Sahil's projects/tools
-6. **Watch out for** — the common pitfalls
-7. **Resources** — curated links (paper/model card + something to try) with focus notes
-8. **Recall (reply in thread)** — the 2-3 active-recall questions
-9. **Recap** — 3 bullets, plus the spiral callback to a previous lesson
-10. **Audio summary** MEDIA tag — `MEDIA:~/.hermes/runbooks/mrhermagi/YYYY-MM-DD/lesson-N-slug.mp3`
-11. **HTML full lesson** MEDIA tag — `MEDIA:~/.hermes/runbooks/mrhermagi/YYYY-MM-DD/lesson-N-slug.html`
+2. **Learning objective** — the one "By the end you can ..." line
+3. **The gist** — 3-5 sentences: the simple analogy + the core idea in plain English. Just enough to land the concept; the depth is in the HTML.
+4. **Recall (reply in thread)** — the 2-3 active-recall questions (these invite replies, so keep them in Discord)
+5. **📎 Full lesson + audio attached below** — one line telling Sahil the HTML deep-dive and audio summary are attached.
+6. **Audio** MEDIA tag — `MEDIA:~/.hermes/runbooks/mrhermagi/YYYY-MM-DD/lesson-N-slug.mp3`
+7. **HTML full lesson** MEDIA tag — `MEDIA:~/.hermes/runbooks/mrhermagi/YYYY-MM-DD/lesson-N-slug.html`
 
-Create parent directories before writing files. Verify files exist before outputting MEDIA: tags.
+The two MEDIA files are delivered together as ONE attachment message beneath the summary, so the result is a tidy "comment + its files". Create parent directories before writing files. Verify files exist before outputting MEDIA: tags.
 
-The HTML is the full deep-dive (include the collapsible answer key for the recall questions). For HTML: dark mode, `#11100f` background, `#fbbf24` accent, `#1c1a18`/`#2c2a28` cards, `#f5f5f4` text, max-width 720px centred for mobile reading.
+The HTML is the FULL deep-dive and must contain everything: title, learning objective, why it matters, the layered concept explainer (analogy → technical → "in plain English"), worked example, common pitfalls, resources with links, the recall questions WITH a collapsible answer key, recap, and the spiral callback. This is where the real teaching lives, so do not skimp on it. For HTML: dark mode, `#11100f` background, `#fbbf24` accent, `#1c1a18`/`#2c2a28` cards, `#f5f5f4` text, max-width 720px centred for mobile reading.
 
 For audio: write a clean spoken-narration script first (no markup, no code symbols read aloud, no URLs — describe them instead), save it as `lesson-N-slug.txt`, then generate the MP3 from THAT script with `edge-tts --voice en-GB-SoniaNeural` (install via `pipx install edge-tts`; use the full path to the binary if it is not on PATH in the cron context). The narration should be a natural, listenable summary for commute listening, not a read-out of the HTML.
 
