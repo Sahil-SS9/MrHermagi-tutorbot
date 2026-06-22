@@ -1,5 +1,5 @@
-# Miyagi Curriculum Template
-# Copy this file, fill in your subject, and Miyagi delivers it.
+# MrHermagi Curriculum Template
+# Copy this file, fill in your subject, and MrHermagi delivers it.
 # See README.md for full documentation.
 
 meta:
@@ -63,7 +63,7 @@ delivery:
   include_audio: true                  # Generate TTS audio summaries?
   dark_mode_html: true                 # Dark mode for HTML cards
 
-# Teaching style (passed to the Miyagi persona)
+# Teaching style (passed to the MrHermagi persona)
 teaching:
   style: "analogy-driven, Socratic"
   starting_knowledge: "describe what the student already knows here"

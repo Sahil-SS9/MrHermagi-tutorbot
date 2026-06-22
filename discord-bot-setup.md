@@ -1,11 +1,11 @@
 # Discord Bot Setup Guide
 
-This guide walks through creating the Discord bot that Miyagi uses for lesson delivery and Q&A.
+This guide walks through creating the Discord bot that MrHermagi uses for lesson delivery and Q&A.
 
 ## Step 1: Create a Discord Application
 
 1. Go to [discord.com/developers/applications](https://discord.com/developers/applications)
-2. Click **New Application** → name it "Miyagi" (or your teacher's name)
+2. Click **New Application** → name it "MrHermagi" (or your teacher's name)
 3. Click **Create**
 4. Go to the **Bot** tab in the left sidebar
 5. Click **Add Bot** → confirm
@@ -80,7 +80,7 @@ Copy the channel ID:
 
 1. Right-click your server → **Create Channel**
 2. Type: **Text**
-3. Name: `ask-miyagi` (or `ask-your-teacher`)
+3. Name: `ask-mrhermagi` (or `ask-your-teacher`)
 
 Copy the channel ID (same method as above).
 
@@ -93,7 +93,7 @@ Update `~/.hermes/profiles/mrhermagi/config.yaml` with your channel IDs:
 discord:
   channel_prompts:
     "YOUR_QA_CHANNEL_ID": |
-      You are Miyagi, a personal AI/ML teacher.
+      You are MrHermagi, a personal AI/ML teacher.
       # ... teacher persona prompt ...
 ```
 
@@ -105,7 +105,7 @@ hermes cron create \
   --schedule "0 7 * * *" \
   --deliver "discord:YOUR_FORUM_CHANNEL_ID" \
   --prompt "$(cat templates/cron-prompt.md)" \
-  --name "Miyagi Daily Lesson" \
+  --name "MrHermagi Daily Lesson" \
   --model "kimi-k2.6" \
   --provider "ollama-cloud"
 ```
@@ -140,7 +140,7 @@ hermes cron update {job_id} \
 
 ## Optional: Separate Bot Per Profile
 
-If you want Miyagi as a standalone bot (separate from your main Kensei bot):
+If you want MrHermagi as a standalone bot (separate from your main Kensei bot):
 
 1. Repeat Steps 1-3 for a second Discord application
 2. Use the second bot token in the miyagi profile `.env`
@@ -148,6 +148,6 @@ If you want Miyagi as a standalone bot (separate from your main Kensei bot):
 4. The cron uses the profile gateway for delivery
 
 This gives you:
-- Separate online status (Miyagi shows as its own bot)
+- Separate online status (MrHermagi shows as its own bot)
 - Independent rate limits
 - Clean identity separation
