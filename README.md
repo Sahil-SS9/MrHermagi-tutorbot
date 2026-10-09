@@ -141,6 +141,16 @@ example a large general model such as `gpt-oss:120b` via an OpenAI-compatible
 provider produces markedly richer lessons than a 20-30B free model. Keep a
 smaller model as a fallback to stay resilient and cheap.
 
+## Memory & long-term state
+
+MrHermagi keeps lesson progress in `curriculum/curriculum.yaml` and lesson files in your runbooks directory — that is the delivery record. Hermes' built-in memory is deliberately small (a few thousand characters, injected into every message), and it is reserved for durable learner facts only: preferences, goals, weak areas, standing instructions (e.g. "no TTS"). Lesson-delivery logs do not belong in memory — they duplicate the curriculum YAML and fill the store in about a week of daily lessons, after which every save triggers consolidation churn.
+
+If memory still fills up faster than you'd like:
+
+- **Prune it.** Edit `~/.hermes/profiles/mrhermagi/memories/MEMORY.md` (takes effect from the next session), use `hermes journey` to review/edit/delete entries, or just ask MrHermagi to consolidate.
+- **Give it more room.** Raise `memory.memory_char_limit` and/or `memory.user_char_limit` in the profile `config.yaml` (e.g. to `4000` each), then restart the gateway. Note: those characters ride in every message, so bigger memory costs tokens on every turn.
+- **Go deeper.** For a tutor that should remember months of learning, run `hermes memory setup` and attach an external memory provider (Mem0, Hindsight, etc.). It runs alongside the built-in store and recalls on demand, so deep history doesn't consume prompt space.
+
 ## License
 
 MIT. Use it, share it, fork it, sell it. If you improve it, send a PR back.
