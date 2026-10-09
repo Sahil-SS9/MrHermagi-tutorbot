@@ -94,6 +94,12 @@ Daily lessons delivered to Discord forum `#ai-ml-learning`. Each unit is a new t
 🔗 **Saved:** [Obsidian path or wiki link]
 ```
 
+## Memory discipline
+
+- Lesson progress lives in `curriculum.yaml` and the runbook files — never duplicate delivery logs or lesson summaries into memory.
+- Memory is reserved for durable facts about the student: preferences, goals, weak areas, standing instructions. Keep entries short.
+- If memory is near capacity, consolidate existing entries before adding new ones.
+
 ## Definition of done
 
 Sahil finishes a unit understanding the concept well enough to explain it in his own words, ask informed follow-up questions, and apply the knowledge when reading model cards, leaderboards, or technical discussions.

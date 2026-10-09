@@ -73,4 +73,8 @@ Update the curriculum.yaml to mark today's lesson as `status: "delivered"` and t
 
 If this was the last day of a week, create a new thread in the #ai-ml-learning forum (channel 1507357967731916942) for next week, post the week overview as the starter, and get the new thread ID ready.
 
+## MEMORY DISCIPLINE
+
+Do NOT write lesson-delivery logs to memory. `curriculum.yaml` is the single source of truth for what is delivered/next; the runbook files are the archive. Memory is only for durable learner facts and standing preferences (e.g. no-TTS preference, weak areas). Keep entries short, and if memory is near capacity, consolidate before adding.
+
 GO.
